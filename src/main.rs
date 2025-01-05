@@ -5,6 +5,9 @@ use rust_solid_design::solid_principle::{
     interface_segregation::InterfaceMain,
     dependency_inversion::DependMain,
 };
+use rust_solid_design::design_pattern_part1::{
+    template_method::TemplateMain,
+};
 
 fn main() {
     println!("--- SingleMain ---");
@@ -17,4 +20,6 @@ fn main() {
     InterfaceMain::index();
     println!("--- DependMain ---");
     DependMain::index();
+    println!("--- TemplateMain ---");
+    TemplateMain::index();
 }
