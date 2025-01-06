@@ -7,6 +7,7 @@ use rust_solid_design::solid_principle::{
 };
 use rust_solid_design::design_pattern_part1::{
     template_method::TemplateMain,
+    iterator::IteratorMain,
 };
 
 fn main() {
@@ -22,4 +23,6 @@ fn main() {
     DependMain::index();
     println!("--- TemplateMain ---");
     TemplateMain::index();
+    println!("--- IteratorMain ---");
+    IteratorMain::index();
 }
