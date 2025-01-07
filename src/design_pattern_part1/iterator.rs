@@ -1,6 +1,6 @@
 trait IIterator {
     fn has_next(&self) -> bool;
-    fn next(&mut self) -> Vec<Patient>;
+    fn next(&mut self) -> Patient;
 }
 
 trait Aggregate {
@@ -35,7 +35,7 @@ impl WaitingRoom {
         self.patients.clone()
     }
 
-    fn get_count(&self) -> i64 {
+    fn get_count(&self) -> usize {
         self.patients.len().try_into().unwrap()
     }
 
@@ -51,7 +51,7 @@ impl Aggregate for WaitingRoom {
 }
 
 struct WaitingRoomIterator {
-    position: i64,
+    position: usize,
     aggregate: WaitingRoom,
 }
 
@@ -69,13 +69,13 @@ impl IIterator for WaitingRoomIterator {
         self.position < self.aggregate.get_count()
     }
 
-    fn next(&mut self) -> Vec<Patient> {
+    fn next(&mut self) -> Patient {
         if self.has_next() == false {
             println!("患者がいません");
-            return Vec::new();
+            return Patient::new(0, "empty".to_string());
         }
 
-        let patient = self.aggregate.get_patients();
+        let patient = self.aggregate.get_patients()[self.position].clone();
         self.position += 1;
 
         return patient;
