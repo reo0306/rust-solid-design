@@ -8,6 +8,8 @@ use rust_solid_design::solid_principle::{
 use rust_solid_design::design_pattern_part1::{
     template_method::TemplateMain,
     iterator::IteratorMain,
+    facade::FacadeMain,
+    factory_method::FactoryMain,
 };
 
 fn main() {
@@ -25,4 +27,8 @@ fn main() {
     TemplateMain::index();
     println!("--- IteratorMain ---");
     IteratorMain::index();
+    println!("--- FacadeMain ---");
+    FacadeMain::index();
+    println!("--- FactoryMain ---");
+    FactoryMain::index();
 }
