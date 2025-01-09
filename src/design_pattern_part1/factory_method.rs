@@ -45,21 +45,19 @@ impl CreditCard for Gold {
 }
 
 trait CreditCardFactory {
-    fn create_credit_card(owner: String) -> CreditCard;
-    fn register_credit_card(credit_card: CreditCard);
+    fn create_credit_card(owner: String) -> dyn CreditCard;
+    fn register_credit_card(credit_card: dyn CreditCard);
 }
 
-//struct CreditCardDatabase {
-    //credit_card_database: Vec<&CreditCard>,
-//}
-
-struct PlatinumCreditCardFactory;
+struct PlatinumCreditCardFactory {
+    credit_card_database: Vec<CreditCard>,
+}
 
 impl PlatinumCreditCardFactory {
     fn new() -> Self { Self }
 
-    fn create(&self, owner: &String) -> CreditCard {
-        credit_card = self.create_credit_card(owner);
+    fn create(&self, owner: &String) -> dyn CreditCard {
+        let credit_card = self.create_credit_card(owner);
         self.register_credit_card(credit_card);
 
         credit_card
@@ -67,22 +65,28 @@ impl PlatinumCreditCardFactory {
 }
 
 impl CreditCardFactory for PlatinumCreditCardFactory {
-    fn create_credit_card(&self, owner: String) -> CreditCard {
+    fn create_credit_card(&self, owner: String) -> dyn CreditCard {
         Platinum { owner }
     }
 
-    fn register_credit_card(&self, credit_card_database: Vec<CreditCard>, credit_card: &CreditCard) {
-        credit_card_database.push(credit_card)
+    fn register_credit_card(&self, credit_card_database: Vec<dyn CreditCard>, credit_card: &dyn CreditCard) {
+        self.credit_card_database.push(credit_card)
     }
 }
 
-struct GoldCreditCardFactory;
+struct GoldCreditCardFactory {
+    credit_card_database: Vec<CreditCard>,
+}
 
 impl GoldCreditCardFactory {
-    fn new() -> Self { Self }
+    fn new() -> Self {
+        Self {
 
-    fn create(&self, owner: &String) -> CreditCard {
-        credit_card = self.create_credit_card(owner);
+        }
+    }
+
+    fn create(&self, owner: &String) -> dyn CreditCard {
+        let credit_card = self.create_credit_card(owner);
         self.register_credit_card(credit_card);
 
         credit_card
@@ -90,12 +94,12 @@ impl GoldCreditCardFactory {
 }
 
 impl CreditCardFactory for GoldCreditCardFactory {
-    fn create_credit_card(owner: String) -> CreditCard {
+    fn create_credit_card(owner: String) -> dyn CreditCard {
         Gold { owner }
     }
 
-    fn register_credit_card(credit_card: &CreditCard) {
-        credit_card_database.push(credit_card)
+    fn register_credit_card(credit_card: &dyn CreditCard) {
+        self.credit_card_database.push(credit_card)
     }
 }
 
@@ -105,12 +109,12 @@ impl FacadeMain {
     pub fn index() {
         let credit_card_database: Vec<&CreditCard> = Vec::new();
 
-        platinum_credit_card_factory = PlatinumCreditCardFactory::new();
-        platinum_card = platinum_credit_card_factory.create("Tanaka".to_string());
+        let platinum_credit_card_factory = PlatinumCreditCardFactory::new();
+        let platinum_card = platinum_credit_card_factory.create("Tanaka".to_string());
         println!("{}", platinum_card.get_card_type());
 
-        gold_credit_card_factory = GoldCreditCardFactory::new();
-        gold_card = gold_credit_card_factory.create("Suzuki".to_string());
+        let gold_credit_card_factory = GoldCreditCardFactory::new();
+        let gold_card = gold_credit_card_factory.create("Suzuki".to_string());
         println!("{}", gold_card.get_card_type());
 
         println!("{}", credit_card_database);
