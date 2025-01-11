@@ -9,7 +9,8 @@ use rust_solid_design::design_pattern_part1::{
     template_method::TemplateMain,
     iterator::IteratorMain,
     facade::FacadeMain,
-    factory_method::FactoryMain,
+    //factory_method::FactoryMain,
+    adapter_delegation::AdapterDeleMain,
 };
 
 fn main() {
@@ -29,6 +30,8 @@ fn main() {
     IteratorMain::index();
     println!("--- FacadeMain ---");
     FacadeMain::index();
-    println!("--- FactoryMain ---");
-    FactoryMain::index();
+    //println!("--- FactoryMain ---");
+    //FactoryMain::index();
+    println!("--- AdapterDeleMain ---");
+    AdapterDeleMain::index();
 }
