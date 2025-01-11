@@ -12,6 +12,9 @@ use rust_solid_design::design_pattern_part1::{
     //factory_method::FactoryMain,
     adapter_delegation::AdapterDeleMain,
 };
+use rust_solid_design::design_pattern_part2::{
+    strategy::StrategyMain,
+};
 
 fn main() {
     println!("--- SingleMain ---");
@@ -34,4 +37,6 @@ fn main() {
     //FactoryMain::index();
     println!("--- AdapterDeleMain ---");
     AdapterDeleMain::index();
+    println!("--- Strategy ---");
+    StrategyMain::index();
 }
