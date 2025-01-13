@@ -14,6 +14,7 @@ use rust_solid_design::design_pattern_part1::{
 };
 use rust_solid_design::design_pattern_part2::{
     strategy::StrategyMain,
+    state::StateMain,
 };
 
 fn main() {
@@ -37,6 +38,8 @@ fn main() {
     //FactoryMain::index();
     println!("--- AdapterDeleMain ---");
     AdapterDeleMain::index();
-    println!("--- Strategy ---");
+    println!("--- StrategyMain ---");
     StrategyMain::index();
+    println!("--- StateMain ---");
+    StateMain::index();
 }
