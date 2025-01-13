@@ -15,6 +15,7 @@ use rust_solid_design::design_pattern_part1::{
 use rust_solid_design::design_pattern_part2::{
     strategy::StrategyMain,
     state::StateMain,
+    proxy::ProxyMain,
 };
 
 fn main() {
@@ -42,4 +43,6 @@ fn main() {
     StrategyMain::index();
     println!("--- StateMain ---");
     StateMain::index();
+    println!("--- ProxyMain ---");
+    ProxyMain::index();
 }

@@ -1,5 +1,7 @@
-trait LightState<T> {
-    fn switch(&self) -> T;
+use std::sync::Arc;
+
+trait LightState {
+    fn switch(&self) -> Arc<dyn LightState>;
 }
 
 struct OffState;
@@ -8,10 +10,10 @@ impl OffState {
     fn new() -> Self { Self { } }
 }
 
-impl LightState<OnState> for OffState {
-    fn switch(&self) -> OnState {
+impl LightState for OffState {
+    fn switch(&self) -> Arc<dyn LightState> {
         println!("ライトを点灯します");
-        OnState::new()
+        Arc::new(OnState::new())
     }
 }
 
@@ -21,34 +23,32 @@ impl OnState {
     fn new() -> Self { Self { } }
 }
 
-impl LightState<OffState> for OnState {
-    fn switch(&self) -> OffState {
+impl LightState for OnState {
+    fn switch(&self) -> Arc<dyn LightState> {
         println!("ライトを消灯します");
-        OffState::new()
+        Arc::new(OffState::new())
     }
 }
 
-struct LightSwitch<T> {
-    state: T,
+struct LightSwitch {
+    state: Arc<dyn LightState>,
 }
 
-impl<T: LightState<T>> LightSwitch<T> {
-    fn new() -> Self {
-        Self {
-            state: OffState::new(),
-        }
+impl LightSwitch {
+    fn new(state: Arc<dyn LightState>) -> Self {
+        Self { state }
     }
 
-    fn switch(&self) {
+    fn switch(&mut self) {
         self.state = self.state.switch();
     }
 }
 
-pub struct StateMain<T>;
+pub struct StateMain;
 
-impl<T> StateMain {
+impl StateMain {
     pub fn index() {
-        let light_state: LightSwitch<T> = LightSwitch::new();
+        let mut light_state = LightSwitch::new(Arc::new(OffState::new()));
         light_state.switch();
         light_state.switch();
         light_state.switch();
