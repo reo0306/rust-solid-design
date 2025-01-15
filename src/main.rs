@@ -18,6 +18,7 @@ use rust_solid_design::design_pattern_part2::{
     proxy::ProxyMain,
     composite::CompositeMain,
     builder::BuilderMain,
+    bridge::BridgeMain,
 };
 
 fn main() {
@@ -51,4 +52,6 @@ fn main() {
     CompositeMain::index();
     println!("--- BuilderMain ---");
     BuilderMain::index();
+    println!("--- BridgeMain ---");
+    BridgeMain::index();
 }
