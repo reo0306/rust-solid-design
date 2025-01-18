@@ -5,3 +5,4 @@ pub mod composite;
 pub mod builder;
 pub mod bridge;
 pub mod abstract_factory;
+pub mod chain_of_responsibility;

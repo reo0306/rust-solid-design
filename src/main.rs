@@ -19,6 +19,8 @@ use rust_solid_design::design_pattern_part2::{
     composite::CompositeMain,
     builder::BuilderMain,
     bridge::BridgeMain,
+    abstract_factory::AbstractFactoryMain,
+    chain_of_responsibility::ChainOfResponsibiltyMain,
 };
 
 fn main() {
@@ -54,4 +56,8 @@ fn main() {
     BuilderMain::index();
     println!("--- BridgeMain ---");
     BridgeMain::index();
+    println!("--- AbstractFactoryMain ---");
+    AbstractFactoryMain::index();
+    println!("--- ChainOfResponsibiltyMain ---");
+    ChainOfResponsibiltyMain::index();
 }
