@@ -21,6 +21,7 @@ use rust_solid_design::design_pattern_part2::{
     bridge::BridgeMain,
     abstract_factory::AbstractFactoryMain,
     chain_of_responsibility::ChainOfResponsibiltyMain,
+    decorator::DecoratorMain,
 };
 
 fn main() {
@@ -60,4 +61,6 @@ fn main() {
     AbstractFactoryMain::index();
     println!("--- ChainOfResponsibiltyMain ---");
     ChainOfResponsibiltyMain::index();
+    println!("--- DecoratorMain ---");
+    DecoratorMain::index();
 }
