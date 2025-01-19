@@ -22,6 +22,7 @@ use rust_solid_design::design_pattern_part2::{
     abstract_factory::AbstractFactoryMain,
     chain_of_responsibility::ChainOfResponsibiltyMain,
     decorator::DecoratorMain,
+    prototype::ProtoTypeMain,
 };
 
 fn main() {
@@ -63,4 +64,6 @@ fn main() {
     ChainOfResponsibiltyMain::index();
     println!("--- DecoratorMain ---");
     DecoratorMain::index();
+    println!("--- ProtoTypeMain ---");
+    ProtoTypeMain::index();
 }
