@@ -24,6 +24,10 @@ use rust_solid_design::design_pattern_part2::{
     decorator::DecoratorMain,
     prototype::ProtoTypeMain,
 };
+use rust_solid_design::design_pattern_part3::{
+    observer::ObserverMain,
+    mediator::MediatorMain,
+};
 
 fn main() {
     println!("--- SingleMain ---");
@@ -66,4 +70,8 @@ fn main() {
     DecoratorMain::index();
     println!("--- ProtoTypeMain ---");
     ProtoTypeMain::index();
+    println!("--- ObserverMain ---");
+    ObserverMain::index();
+    println!("--- MediatorMain ---");
+    MediatorMain::index();
 }
