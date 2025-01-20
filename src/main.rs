@@ -28,6 +28,7 @@ use rust_solid_design::design_pattern_part3::{
     observer::ObserverMain,
     mediator::MediatorMain,
     flyWeight::FlyWeightMain,
+    visior::VisitorMain,
 };
 
 fn main() {
@@ -77,4 +78,6 @@ fn main() {
     MediatorMain::index();
     println!("--- FlyweightMain ---");
     FlyWeightMain::index();
+    println!("--- VisitorMain ---");
+    VisitorMain::index();
 }
