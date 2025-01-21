@@ -28,7 +28,8 @@ use rust_solid_design::design_pattern_part3::{
     observer::ObserverMain,
     mediator::MediatorMain,
     flyWeight::FlyWeightMain,
-    visior::VisitorMain,
+    visitor::VisitorMain,
+    memento::MediatorMain,
 };
 
 fn main() {
@@ -80,4 +81,6 @@ fn main() {
     FlyWeightMain::index();
     println!("--- VisitorMain ---");
     VisitorMain::index();
+    println!("--- MementoMain ---");
+    MementoMain::index();
 }
