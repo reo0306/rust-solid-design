@@ -26,7 +26,7 @@ impl Memento for ConcreteMemento {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 struct Notepad {
     memo: String,
 }
@@ -97,7 +97,7 @@ pub struct MementoMain;
 impl MementoMain{
     pub fn index() {
         let mut notepad = Notepad::new("first memo".to_string());
-        let mut caretaker = Caretaker::new(notepad);
+        let mut caretaker = Caretaker::new(notepad.clone());
         caretaker.backup();
 
         notepad.add_memo("second memo".to_string());

@@ -29,7 +29,8 @@ use rust_solid_design::design_pattern_part3::{
     mediator::MediatorMain,
     flyWeight::FlyWeightMain,
     visitor::VisitorMain,
-    memento::MediatorMain,
+    memento::MementoMain,
+    command::CommandMain,
 };
 
 fn main() {
@@ -83,4 +84,6 @@ fn main() {
     VisitorMain::index();
     println!("--- MementoMain ---");
     MementoMain::index();
+    println!("--- CommandMain ---");
+    CommandMain::index();
 }
