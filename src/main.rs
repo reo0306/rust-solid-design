@@ -31,6 +31,7 @@ use rust_solid_design::design_pattern_part3::{
     visitor::VisitorMain,
     memento::MementoMain,
     command::CommandMain,
+    interpreter::InterpreterMain,
 };
 
 fn main() {
@@ -86,4 +87,6 @@ fn main() {
     MementoMain::index();
     println!("--- CommandMain ---");
     CommandMain::index();
+    println!("--- InterpreterMain ---");
+    InterpreterMain::index();
 }
