@@ -1,5 +1,5 @@
 use regex::Regex;
-use chrono::{DateTime, Utc};
+use chrono::{DateTime, Utc, Datelike};
 
 struct Context {
     expression: String,
@@ -15,7 +15,7 @@ impl Context {
     }
 
     fn validate(&self) {
-        let re = Regex::new("(?=.*YYYY)(?=.*MM)(?=.*DD)").unwrap();
+        let re = Regex::new(".*MM.*DD.*YYYY.*").unwrap();
         let result = re.is_match(&self.expression);
         if self.expression.len() != 10 || !result {
             panic!("expressionが不正です")
@@ -24,10 +24,9 @@ impl Context {
 }
 
 trait AbstractExpression {
-    fn interpret(&self, context: Context);
+    fn interpret(&self, context: Context) -> Context;
 }
 
-#[derive(Debug)]
 struct YearExpression {
     child: Option<Box<dyn AbstractExpression>>,
 }
@@ -35,19 +34,18 @@ struct YearExpression {
 impl YearExpression {
     fn new() -> Self { Self { child: None }}
 
-    fn set_child(&mut self, child: impl AbstractExpression) {
-        self.child = Box::new(child);
+    fn set_child(&mut self, child: impl AbstractExpression + 'static) {
+        self.child = Some(Box::new(child));
     }
 }
 
 impl AbstractExpression for YearExpression {
-    fn interpret(&mut self, context: Context) -> Context {
-        let expression = context.expression;
+    fn interpret(&self, mut context: Context) -> Context {
         let year = context.date.year();
-        context.expression = expression;
+        context.expression = context.expression.replace("YYYY", &year.to_string());
 
-        if self.child {
-            self.child.interpret(context);
+        if let Some(ref child) = self.child {
+            return child.interpret(context);
         }
 
         context
@@ -65,19 +63,18 @@ impl MonthExpression {
         }
     }
 
-    fn set_child(&mut self, child: impl AbstractExpression) {
+    fn set_child(&mut self, child: impl AbstractExpression + 'static) {
         self.child = Some(Box::new(child));
     }
 }
 
 impl AbstractExpression for MonthExpression {
-    fn interpret(&mut self, context: Context) -> Context {
-        let expression = context.expression;
-        let year = context.date.month();
-        context.expression = expression;
+    fn interpret(&self, mut context: Context) -> Context {
+        let month = context.date.month();
+        context.expression = context.expression.replace("MM", &month.to_string());
 
-        if self.child {
-            self.child.interpret(context);
+        if let Some(ref child) = self.child {
+            return child.interpret(context);
         }
 
         context
@@ -91,19 +88,18 @@ struct DayExpression {
 impl DayExpression {
     fn new() -> Self { Self { child: None }}
 
-    fn set_child(&mut self, child: impl AbstractExpression) {
-        self.child = Box::new(child);
+    fn set_child(&mut self, child: impl AbstractExpression + 'static) {
+        self.child = Some(Box::new(child));
     }
 }
 
 impl AbstractExpression for DayExpression {
-    fn interpret(&mut self, context: Context) -> Context {
-        let expression = context.expression;
+    fn interpret(&self, mut context: Context) -> Context {
         let year = context.date.day();
-        context.expression = expression;
+        context.expression = context.expression.replace("DD", &year.to_string());
 
-        if self.child {
-            self.child.interpret(context);
+        if let Some(ref child) = self.child {
+            return child.interpret(context);
         }
 
         context
@@ -127,7 +123,7 @@ impl InterpreterMain {
 
         let result = year_expression.interpret(context);
 
-        println!("{}", now_date);
-        println!("{}", result.expression);
+        println!("{:?}", now_date);
+        println!("{:?}", result.expression);
     }
 }
